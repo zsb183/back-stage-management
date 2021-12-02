@@ -1,4 +1,4 @@
-# back-stagemanagement
+# back-stage-management
 
 ## Project setup
 ```
