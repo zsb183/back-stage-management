@@ -35,6 +35,7 @@ export default {
   methods: {
     logOut() {
       window.sessionStorage.removeItem("token_");
+      window.sessionStorage.removeItem("defaultActive");
       this.$router.push("/login");
     },
     changeWidth(v){

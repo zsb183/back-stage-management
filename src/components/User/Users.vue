@@ -36,7 +36,10 @@
       </el-row>
       <!-- 用户表格 -->
       <el-table :data="userList" style="width: 100%" stripe border>
+        
+        <!-- 索引列 -->
         <el-table-column type="index"></el-table-column>
+
         <el-table-column prop="username" label="姓名"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
         <el-table-column prop="mobile" label="电话"></el-table-column>
@@ -51,7 +54,7 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center">
+        <el-table-column label="操作" align="center" width="180px">
           <template slot-scope="scope">
             <!-- 修改 -->
             <el-button
@@ -284,8 +287,8 @@ export default {
     };
   },
   methods: {
+    //   获取用户列表值
     getUserList() {
-      //   获取用户列表值
       this.axios.get("/users", { params: this.axiosObj }).then((res) => {
         if (res.data.meta.status !== 200) {
           this.$message({

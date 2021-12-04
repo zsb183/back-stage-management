@@ -31,11 +31,11 @@ const routes = [{
         {
             path: '/roles',
             component: () =>
-                import ('../components/Roles.vue')
+                import ('../components/power/Roles.vue')
         }, {
             path: '/rights',
             component: () =>
-                import ('../components/Rights.vue')
+                import ('../components/power/Rights.vue')
         },
         {
             path: '/goods',
