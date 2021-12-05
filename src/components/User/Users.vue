@@ -36,7 +36,6 @@
       </el-row>
       <!-- 用户表格 -->
       <el-table :data="userList" style="width: 100%" stripe border>
-        
         <!-- 索引列 -->
         <el-table-column type="index"></el-table-column>
 
@@ -81,6 +80,7 @@
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
+                @click="setRolesDialog(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -162,6 +162,34 @@
         <el-button type="primary" @click="editUser">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!-- 分配角色对话框 -->
+    <el-dialog title="提示" :visible.sync="setRolesDialogVisible" width="30%">
+      <div>
+        <p class="setRolesP">姓名：{{ setRolesUser.username }}</p>
+        <p class="setRolesP">当前角色：{{ setRolesUser.role_name }}</p>
+        <p class="setRolesP">
+          请选择要分配的角色：<el-select
+            v-model="rolesId"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in rolesList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRolesDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="setRoles"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -198,6 +226,8 @@ export default {
       addDialogVisible: false,
       // 修改用户信息对话框隐藏与否
       editDialogVisible: false,
+      // 分配角色对话框隐藏与否
+      setRolesDialogVisible: false,
       // 添加用户对象
       addRuleForm: {
         username: "",
@@ -284,6 +314,12 @@ export default {
           { validator: validateMobile, trigger: "blur" },
         ],
       },
+      // 需要分配角色的用户信息
+      setRolesUser: {},
+      // 角色列表
+      rolesList: [],
+      // 选中角色的ID
+      rolesId:'',
     };
   },
   methods: {
@@ -434,6 +470,39 @@ export default {
           });
         });
     },
+    // 打开分配角色对话框
+    setRolesDialog(role) {
+      this.rolesId='',
+      this.axios.get(`roles`).then((res) => {
+        if (res.data.meta.status !== 200) {
+          return this.$message.error("获取信息失败！");
+        } else {
+          this.rolesList = res.data.data; //获取角色列表
+          this.setRolesUser = role; //获取当前用户
+          this.setRolesDialogVisible = true;
+          // console.log(this.rolesList);
+        }
+      });
+    },
+    // 分配角色
+    setRoles(){
+      // console.log(this.rolesId);
+       this.axios({
+          method: "put",
+          url: `users/${this.setRolesUser.id}/role`,
+          data: {
+            rid:this.rolesId,
+          },
+        }).then(res=>{
+         if (res.data.meta.status !== 200) {
+          return this.$message.error("分配角色失败！");
+        } else {
+          this.setRolesDialogVisible = false;
+           // 重新获取用户数据 刷新列表
+            this.getUserList();
+        }
+      })
+    },
   },
   components: {},
   mounted() {
@@ -455,5 +524,11 @@ export default {
   .el-pagination {
     margin-top: 15px;
   }
+}
+.setRolesP {
+  height: 40px;
+  line-height: 40px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 </style>
