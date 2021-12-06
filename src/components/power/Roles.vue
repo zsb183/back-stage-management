@@ -135,7 +135,6 @@
       title="修改用户信息"
       :visible.sync="editDialogVisible"
       width="50%"
-      @close="editDialogClose"
     >
       <!-- 对话框主体内容 -->
       <el-form
@@ -461,27 +460,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-.el-breadcrumb {
-  margin-bottom: 15px;
-  font-size: 12px;
-}
-.el-card {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
-  .el-table {
-    margin-top: 15px;
-  }
-}
-.el-tag {
-  margin: 7px;
-}
-.bdtop {
-  border-top: 1px solid #eee;
-}
-.bdbottom {
-  border-bottom: 1px solid #eee;
-}
-.vcenter {
-  display: flex;
-  align-items: center;
-}
+
 </style>

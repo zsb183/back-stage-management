@@ -512,23 +512,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-.el-breadcrumb {
-  margin-bottom: 15px;
-  font-size: 12px;
-}
-.el-card {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
-  .el-table {
-    margin-top: 15px;
-  }
-  .el-pagination {
-    margin-top: 15px;
-  }
-}
-.setRolesP {
-  height: 40px;
-  line-height: 40px;
-  margin-top: 7px;
-  margin-bottom: 7px;
-}
+
 </style>

@@ -6,6 +6,8 @@ import './plugins/element.js'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import treeTable from 'vue-table-with-tree-grid'
+import '@/assets/Global.css'
 
 // 配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
@@ -27,6 +29,7 @@ axios.interceptors.request.use(function(config) {
 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
+Vue.component('tree-table', treeTable)
 
 new Vue({
     router,
