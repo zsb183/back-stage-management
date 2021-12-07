@@ -66,7 +66,11 @@
               >编辑</el-button
             >
             <!-- 删除 -->
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleteCate(scope.row.cat_id)"
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="deleteCate(scope.row.cat_id)"
               >删除</el-button
             >
           </div>
@@ -91,7 +95,7 @@
 
     <!-- 添加分类 -->
     <el-dialog
-      title="提示"
+      title="添加分类"
       :visible.sync="addDialogVisible"
       width="50%"
       @close="addDialogClose"
@@ -236,7 +240,7 @@ export default {
       editCateForm: {
         cat_name: "",
       },
-      // 需要修改的数据验证
+      //需要修改的数据验证
       editRules: {
         cat_name: [
           {
@@ -278,7 +282,7 @@ export default {
           }
         });
     },
-    //   监听添加分类对话框关闭
+    //  监听添加分类对话框关闭
     addDialogClose() {
       this.$refs["addCateForm"].resetFields();
     },
@@ -286,7 +290,7 @@ export default {
     editDialogClose() {
       this.$refs["editCateForm"].resetFields();
     },
-    // 打开添加分类对话框
+    //  打开添加分类对话框
     openAddDialog() {
       this.cateKeys = [];
       this.axios
@@ -309,7 +313,7 @@ export default {
     },
     // 监听级联选择器选项变化
     parentCateChange() {
-      // console.log(this.cateKeys);
+      // *console.log(this.cateKeys);
       if (this.cateKeys.length > 0) {
         this.addCateForm.cat_pid = this.cateKeys[this.cateKeys.length - 1];
         this.addCateForm.cat_level = this.cateKeys.length;
@@ -317,7 +321,7 @@ export default {
         this.addCateForm.cat_pid = 0;
         this.addCateForm.cat_level = 0;
       }
-      //   console.log(this.addCateForm);
+      // * console.log(this.addCateForm);
     },
     // 添加分类
     addCate() {
@@ -389,8 +393,8 @@ export default {
       });
     },
     // 删除分类
-    deleteCate(id){
- this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
+    deleteCate(id) {
+      this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
@@ -415,7 +419,7 @@ export default {
             message: "已取消删除",
           });
         });
-    }
+    },
   },
   components: {},
   mounted() {
@@ -425,4 +429,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+.el-cascader {
+  width: 100%;
+}
 </style>
