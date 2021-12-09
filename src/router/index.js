@@ -62,7 +62,7 @@ const routes = [{
             {
                 path: '/orders',
                 component: () =>
-                    import ('../components/Orders.vue')
+                    import ('../components/order/Orders.vue')
             },
             {
                 path: '/reports',

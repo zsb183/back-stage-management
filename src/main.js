@@ -50,7 +50,7 @@ Vue.filter("formattingTime", function(timeData) {
     h = h > 9 ? h : '0' + h;
     m = m > 9 ? m : '0' + m;
     s = s > 9 ? s : '0' + s;
-    return `${year}-${month}-${date} ${h}:${m}${s}`
+    return `${year}-${month}-${date} ${h}:${m}:${s}`
 })
 
 Vue.use(VueAxios, axios)
