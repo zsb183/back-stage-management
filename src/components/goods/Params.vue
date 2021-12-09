@@ -170,9 +170,9 @@ export default {
       editDialogVisible: false,
       // 控制Tag与文本框的显示
       inputVisible:false,
-      // 父级分类列表
+      // 分类列表
       CateList: [],
-      // 父级分类列表请求参数
+      // 分类列表请求参数
       CatePage: {
         type: 3,
       },

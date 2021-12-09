@@ -9,6 +9,15 @@ import VueAxios from 'vue-axios'
 import treeTable from 'vue-table-with-tree-grid'
 import '@/assets/Global.css'
 
+
+// 配置富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
+Vue.use(VueQuillEditor, /* { default global options } */ )
+
 // 配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
     // Vue.prototype.$http = axios
@@ -26,6 +35,23 @@ axios.interceptors.request.use(function(config) {
     // 对请求错误做些什么
     return Promise.reject(error);
 });
+
+// 格式化时间过滤器
+Vue.filter("formattingTime", function(timeData) {
+    let time = new Date(timeData);
+    let year = time.getFullYear();
+    let month = time.getMonth() + 1;
+    let date = time.getDate();
+    let h = time.getHours();
+    let m = time.getMinutes();
+    let s = time.getSeconds();
+    month = month > 9 ? month : '0' + month;
+    date = date > 9 ? date : '0' + date;
+    h = h > 9 ? h : '0' + h;
+    m = m > 9 ? m : '0' + m;
+    s = s > 9 ? s : '0' + s;
+    return `${year}-${month}-${date} ${h}:${m}${s}`
+})
 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
